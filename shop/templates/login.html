@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <title>Sign In</title>
+  <link rel="icon" href="../static/images/favicon.png" type="image/x-icon"/>
+  <!-- Font Awesome -->
+  <link rel="stylesheet" type="text/css" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
+  <!-- Bootstrap core CSS -->
+  <link type="text/css" href="../static/css/bootstrap.min.css"rel="stylesheet">
+  <!-- Material Design Bootstrap -->
+  <link type="text/css" href="../static/css/mdb.min.css" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="../static/css/main.css">
+ <style>
+
+.alert {
+    background-color: #f44336;
+    padding: .50rem,1.25rem;
+    color: white;
+}
+
+.closebtn {
+    margin-left: 15px;
+    color: white;
+    font-weight: bold;
+    float: right;
+    font-size: 22px;
+    line-height: 20px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.closebtn:hover {
+    color: white;
+}
+  .btn-toggle-pass {
+      --info-color: #0099CC;
+      border: none;
+      position: absolute;
+      top: 11px;
+      background: transparent;
+      right: 0;
+  }
+
+  .btn-toggle-pass.active {
+      color: var(--info-color);
+  }
+ </style>
+</head>
+
+<body style="background-image: url(../static/images/wallpaper.jpg);
+background-position: center;
+background-repeat: no-repeat;">
+  
+  <!-- Navigation -->
+<div class="container">
+  <!-- Material form login -->
+<div class="card logform">
+
+  <h5 class="card-header info-color white-text text-center py-4">
+    <strong>Sign in</strong>
+  </h5>
+  {% if error %}
+				<div class=alert><span class=closebtn onclick="this.parentElement.style.display='none'">&times;</span>
+        <strong>{{ error }} </strong></div>
+		{% endif %}
+  <!--Card content-->
+  <div class="card-body px-lg-5 pt-0">
+    <!-- Form -->
+    <form class="text-center" style="color: #757575;" action="/verification/" method="POST">
+      {% csrf_token %}
+      <!-- Email -->
+      <div class="md-form">
+        <input type="email" id="materialLoginFormEmail" name="email" class="form-control">
+        <label for="materialLoginFormEmail">E-mail</label>
+      </div>
+
+      <!-- Password -->
+      <div class="md-form">
+        <input type="password" id="password" name="password" class="form-control disablecopypaste">
+        <label for="materialLoginFormPassword">Password </label> 
+      </div>
+      
+      <div class="d-flex justify-content-around">
+        <div>
+          <!-- Forgot password -->
+          <a href="{% url 'forgotpassword' %}">Forgot password?</a>
+        </div>
+      </div>
+
+      <!-- Sign in button -->
+      <button class="btn btn-outline-info btn-rounded btn-block my-4 waves-effect z-depth-0" type="submit">Sign in</button>
+
+      <!-- Register -->
+      <p>Not a member?
+        <a href="{% url 'signup' %}">Register</a>
+      </p>
+
+      <!-- Social login -->
+      <p>or sign in with:</p>
+      <div>
+      <a href="{% url 'social:begin' 'facebook' %}">
+        <img src="../static/images/svg/facebook-round-color.svg" class="ml-3" alt="cart_svg" style="height: 33px;"> 
+      </a>
+        <a href="{% url 'social:begin' 'instagram' %}">
+        <img src="../static/images/svg/instagram-round-color.svg" class="ml-3" alt="cart_svg" style="height: 33px;"> 
+          </a>
+      <a href="{% url 'social:begin' 'google-oauth2' %}">
+        <img src="../static/images/svg/icons8-google.svg" class="ml-3" alt="cart_svg" style="height: 33px;"> 
+      </a>
+      <a href="https://www.twitter.com/">
+        <img src="../static/images/svg/twitter-round-color.svg" class="ml-3" alt="cart_svg" style="height: 33px;"> 
+      </a>
+      </div>
+    </form>
+    <!-- Form -->
+
+  </div>
+
+</div>
+<!-- Material form login -->
+</div>
+  <!-- SCRIPTS -->
+  <!-- JQuery -->
+  <script type="text/javascript" src="../static/js/jquery-3.4.1.min.js"></script>
+  <!-- Bootstrap tooltips -->
+  <script type="text/javascript" src="../static/js/popper.min.js"></script>
+  <!-- Bootstrap core JavaScript -->
+  <script type="text/javascript" src="../static/js/bootstrap.min.js">
+  </script>
+  <!-- MDB core JavaScript -->
+  <script type="text/javascript" src="../static/js/mdb.min.js"></script>
+  
+  <script type="text/javascript">
+    /* WOW.js init */
+    new WOW().init();
+    // Tooltips Initialization
+    $(function () {
+      $('[data-toggle="tooltip"]').tooltip()
+    })
+
+    // Material Select Initialization
+    $(document).ready(function () {
+      $('.mdb-select').material_select();
+    });
+
+    // SideNav Initialization
+    $(".button-collapse").sideNav();
+    $(document).ready(function () {
+      $('input.disablecopypaste').bind('copy paste', function (e) {
+         e.preventDefault();
+      });
+    });
+  </script>
+  <script type="text/javascript" src="../static/js/main.js"></script>
+
+</body>
+
+</html>

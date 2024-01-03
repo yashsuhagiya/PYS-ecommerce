@@ -1,0 +1,215 @@
+{% extends 'base.html' %}
+{% load index %}
+<link rel="stylesheet" type="text/css" href="../static/css/style.css">
+{% block content %}
+<main>
+  
+    <div class="container-fluid">
+      {% if message %}
+				<div class=alert><span class=closebtn onclick="this.parentElement.style.display='none'">&times;</span>
+        <strong>{{ message }} </strong></div>
+		    {% endif %}
+      <!-- Section: Edit Account -->
+      <section class="section">
+        
+        <!-- First row -->
+        <div class="row">
+          <!-- First column -->
+          <div class="col-lg-4 mb-4">
+
+            <!-- Card -->
+            <div class="card card-cascade narrower">
+
+              <!-- Card image -->
+              <div class="view view-cascade gradient-card-header mdb-color lighten-1">
+                <h5 class="mb-0 font-weight-bold">Your Details</h5>
+              </div>
+              <!-- Card image -->
+              <div class="card-body card-body-cascade text-center">
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="md-form mb-0">
+                      <input type="text" id="form1" class="form-control validate" value="{{customer.firstname}}&nbsp;{{customer.lastname}}" disabled>
+                      <label for="form1" data-error="wrong" data-success="right">Name</label>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                      <div class="md-form mb-0">
+                        <input type="text" id="form1" class="form-control validate" value="{{customer.email}}" disabled>
+                        <label for="form1" data-error="wrong" data-success="right">Email ID</label>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-12">
+                      <div class="md-form mb-0">
+                        <input type="text" id="form1" class="form-control validate" value="{{customer.mobile_no}}" disabled>
+                        <label for="form1" data-error="wrong" data-success="right">Mobile Number</label>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <div class="row">
+                    <div class="col-md-12">
+                      <div class="md-form mb-0">
+                        <input type="text" id="form77" name="address" class="form-control validate"value="{{custaddress}}">
+                        <label for="form77" data-error="wrong" data-success="right">Address</label>
+                      </div>
+                    </div>
+                  </div>
+            </div>
+            </div>
+            <!-- Card -->
+
+          </div>
+          <!-- First column -->
+
+          <!-- Second column -->
+          <div class="col-lg-8 mb-4">
+
+            <!-- Card -->
+            <div class="card card-cascade narrower">
+
+              <!-- Card image -->
+              <div class="view view-cascade gradient-card-header mdb-color lighten-1">
+                <h5 class="mb-0 font-weight-bold">Edit Account</h5>
+              </div>
+              <!-- Card image -->
+
+              <!-- Card content -->
+              <div class="card-body card-body-cascade text-center">
+
+                <form class="text-center" style="color: #757575;" action="/updatedetail/{{custid}}" method="POST">
+        {% csrf_token %}
+                  <!-- First row -->
+
+                  <div class="row">
+                   
+                    <!-- First column -->
+                    <div class="col-md-12">
+                      <div class="md-form mb-0">
+                        <input type="text" id="form1" name="email" class="form-control validate" value="{{customer.email}}" >
+                        <label for="form1" data-error="wrong" data-success="right">Email ID</label>
+                      </div>
+                    </div>
+                    
+                    </div>
+                  <!-- First row -->
+
+                  <!-- First row -->
+                  <div class="row">
+                    <!-- First column -->
+                    <div class="col-md-6">
+                      <div class="md-form mb-0">
+                        <input type="text" id="form81" name="firstname" class="form-control validate" value="{{customer.firstname}}">
+                        <label for="form81" data-error="wrong" data-success="right">First name</label>
+                      </div>
+                    </div>
+
+                    <!-- Second column -->
+                    <div class="col-md-6">
+                      <div class="md-form mb-0">
+                        <input type="text" id="form82"name="lastname" class="form-control validate"value="{{customer.lastname}}">
+                        <label for="form82" data-error="wrong" data-success="right">Last name</label>
+                      </div>
+                    </div> 
+                  </div>
+                  <div class="row">
+                    <!-- First column -->
+                    <div class="col-md-6">
+                      <div class="md-form mb-0">
+                        <input type="text" id="form81" name="mobile_no"class="form-control validate" value="{{customer.mobile_no}}">
+                        <label for="form81" data-error="wrong" data-success="right">Mobile Number</label>
+                      </div>
+                    </div>
+
+                    <!-- Second column -->
+                    <div class="col-md-6">
+                      <div class="md-form mb-0">
+                        <input type="text" id="form82"name="gender" class="form-control validate" value="{{customer.gender}}">
+                        <label for="form82" data-error="wrong" data-success="right">Gender</label>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="view view-cascade gradient-card mdb-color text text-white lighten-1 p-2 my-2">
+                <h5 class="mb-0 font-weight-bold">Edit Address</h5>
+              </div>
+                  <div class="row">
+                    <!-- First column -->
+                    <div class="col-md-6">
+                      <div class="md-form mb-0">
+                        <input type="text" id="form81" name="first_len"class="form-control validate" value="{{address.first_len}}" required>
+                        <label for="form81" data-error="wrong" data-success="right">First Len</label>
+                      </div>
+                    </div>
+
+                    <!-- Second column -->
+                    <div class="col-md-6">
+                      <div class="md-form mb-0">
+                        <input type="text" id="form82"name="second_len" class="form-control validate" value="{{address.second_len}}" required>
+                        <label for="form82" data-error="wrong" data-success="right">Second Len</label>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <!-- First column -->
+                    <div class="col-md-6">
+                      <div class="md-form mb-0">
+                        <input type="text" id="form81" name="city"class="form-control validate"value="{{address.city}}" required>
+                        <label for="form81" data-error="wrong" data-success="right">City</label>
+                      </div>
+                    </div>
+
+                    <!-- Second column -->
+                    <div class="col-md-6">
+                      <div class="md-form mb-0">
+                        <input type="text" id="form82"name="state" class="form-control validate"value="{{address.state}}" required>
+                        <label for="form82" data-error="wrong" data-success="right">State</label>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- First row -->
+
+                  <!-- Second row -->
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="md-form mb-0">
+                        <input type="text" id="form77" name="pincode" class="form-control validate"value="{{address.pincode}}" required>
+                        <label for="form77" data-error="wrong" data-success="right">Pincode</label>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- Second row -->
+                  <!-- Fourth row -->
+                  <div class="row">
+                    <div class="col-md-12 text-center my-4">
+                       <button class="btn btn-info btn-rounded  waves-effect z-depth-0" type="submit">Update Account</button>
+
+                    </div>
+                  </div>
+                  <!-- Fourth row -->
+
+                </form>
+                <!-- Edit Form -->
+
+              </div>
+              <!-- Card content -->
+
+            </div>
+            <!-- Card -->
+
+          </div>
+          <!-- Second column -->
+
+        </div>
+        <!-- First row -->
+
+      </section>
+      <!-- Section: Edit Account -->
+
+    </div>
+
+  </main>
+{% endblock %}

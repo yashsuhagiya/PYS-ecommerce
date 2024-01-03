@@ -1,0 +1,557 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load range %}
+<link rel="stylesheet" type="text/css" href="../static/css/style.css">
+{% block content %}
+
+  <div class="mt-5 pt-3">
+    <section id="productDetails" class="pb-5">
+
+      <!-- News card -->
+      <div class="card mt-5 hoverable">
+
+        <div class="row mt-1 pd-1">
+
+          <div class="col-lg-6">
+
+              <div class="p-5 text-center">
+                    <img src="{{product.imageURL}}" style="height: 450px;overflow: hidden;"  alt="First slide" class="img-fluid">
+              </div>
+           
+          </div>
+
+          <div class="col-lg-6 pr-5" style="padding: 75px 0;">
+
+            <h2 class="h2-responsive product-name font-weight-bold dark-grey-text mb-2 ml-xl-0 ml-4">
+                <strong>{{product.name}} </strong>
+            </h2>
+            {% for Category in product.category %}
+                      {% if Category == 'bestseller' %}
+                          <span class="badge badge-danger mb-2">{{Category}}</span>
+                      {% endif %}
+                      {% if Category == 'sale' %}
+                          <span class="badge badge-success mb-2">{{Category}}</span>
+                      {% endif %}
+                      {% if Category == 'new' %}
+                          <span class="badge badge-info mb-2">{{Category}}</span>
+                      {% endif %}
+            {% endfor %}
+
+            <h3 class="h3-responsive mb-5 ml-xl-0 ml-4">
+
+              <span class="font-weight-bold">
+
+                <strong>{{product.price|mul:product.discount}}&#x20b9;</strong>
+
+              </span>
+
+              <span class="grey-text">
+
+                <small>
+                  {% if  0|eql:product.discount %}
+                    <s>{{product.price}}</s>&#x20b9;
+                  {% endif %}
+                </small>
+
+                  <small>
+                    {% if  0|eql:product.discount %}
+                        &nbsp;{{product.discount}}&#37;&nbsp;off
+                    {% endif %}
+                  </small>
+
+              </span>
+
+            </h3>
+            <span style="font-size: 17px;">
+              <p class="ml-xl-0 ml-4">{{product.description}} </p>
+              <p class="ml-xl-0 ml-4">Random Discription</p>
+    
+              <p class="ml-xl-0 ml-4">
+
+              <strong>Size: </strong>
+              {% for size in product.size %}
+                {{size}}
+              {% endfor %}
+              </p>
+              {% if product.stock %}
+                  <p class="ml-xl-0 ml-4">
+                    <strong>Availability: </strong>In stock</p>
+              {% else %}
+                  <p class="ml-xl-0 ml-4">
+                    <strong>Availability: </strong>Not in stock</p>
+              {% endif %}
+            <section class="color">
+              <div>
+                <p class="ml-xl-0 ml-4">
+                <h><strong>Color: </strong>{{product.color}}</p>
+                </h5>
+                     <ul class="rating">
+                     <strong class="black-text">Rating: </strong>
+                          {% for star in product.rating|times %}
+                            <li> 
+ 
+                              <i class="fas fa-star blue-text"></i>
+
+                            </li>
+                          {% endfor %}
+                          {% for star in product.rating|times1 %}
+                            <li>
+
+                              <i class="fas fa-star grey-text"></i>
+
+                            </li>
+                          {% endfor %}
+
+                      </ul>
+                      {% if request.session.name %}
+                <div class="row mt-4 mb-4">
+                  <div class="col-md-12 text-center">
+                      
+                         <a class="btn btn-primary btn-rounded" href="/addtocart/{{product.id}}" >
+                        <i class="fas fa-cart-plus mr-2" aria-hidden="true"></i> Add to cart</a>
+                     
+                  </div>
+
+                </div>
+                  {% endif %}
+              </div>
+            </section>
+          </span>
+          </div>
+
+        </div>
+   
+      </div>
+      <!-- News card -->
+
+    </section>
+
+
+    <!-- Section: Products v.5 -->
+    <section id="products" class="pb-5 mt-4">
+
+      <hr>
+
+      <h4 class="h4-responsive dark-grey-text font-weight-bold my-5 text-center">
+
+        <strong>Related Products</strong>
+
+      </h4>
+
+      <!-- Carousel Wrapper -->
+      <div id="multi-item-example" class="carousel slide carousel-multi-item" data-ride="carousel">
+
+        <!-- Controls -->
+        <div class="controls-top">
+
+          <a class="btn-floating primary-color" href="#multi-item-example" data-slide="prev">
+
+            <i class="fas fa-chevron-left"></i>
+
+          </a>
+
+          <a class="btn-floating primary-color" href="#multi-item-example" data-slide="next">
+
+            <i class="fas fa-chevron-right"></i>
+
+          </a>
+
+        </div>
+        <!-- Controls -->
+
+        <!-- Indicators -->
+        <ol class="carousel-indicators">
+            {% if rproducts1 %}
+          <li class="primary-color" data-target="#multi-item-example" data-slide-to="0" class="active"></li>
+            {% endif %}
+            {% if rproducts2 %}
+          <li class="primary-color" data-target="#multi-item-example" data-slide-to="1"></li>
+            {% endif %}
+            {% if rproducts3 %}
+          <li class="primary-color" data-target="#multi-item-example" data-slide-to="2"></li>
+            {% endif %}
+        </ol>
+        <!-- Indicators -->
+
+        <!-- Slides -->
+        <div class="carousel-inner" role="listbox">
+
+          <!-- First slide -->
+          {% if rproducts1 %}
+          <div class="carousel-item active">
+          {% for product in rproducts1 %}
+            <div class="col-md-4 mb-4">
+             
+              <!-- Card -->
+              
+              <div class="card card-ecommerce">
+
+                <!-- Card image -->
+                
+                <div class="view overlay"style=" overflow: hidden; height:300px;">
+
+                  <img src="{{product.imageURL}}" class="img-fluid" 
+                    alt="product">
+                  <a href="/product/{{product.id}}">
+
+                    <div class="mask rgba-white-slight"></div>
+
+                  </a>
+
+                </div>
+                <!-- Card image -->
+
+                <!-- Card content -->
+                <div class="card-body">
+
+                  <!-- Category & Title -->
+                  <h5 class="card-title mb-1">
+
+                    <strong>
+
+                      <a href="" class="dark-grey-text">{{product.name}}</a>
+
+                    </strong>
+
+                  </h5>
+                    {% for Category in product.category %}
+                        {% if Category == 'bestseller' %}
+                            <span class="badge badge-danger mb-2">{{Category}}</span>
+                        {% endif %}
+                        {% if Category == 'sale' %}
+                            <span class="badge badge-success mb-2">{{Category}}</span>
+                        {% endif %}
+                        {% if Category == 'new' %}
+                            <span class="badge badge-info mb-2">{{Category}}</span>
+                        {% endif %}
+                    {% endfor %}
+
+                  <!-- Rating -->
+                  <ul class="rating">
+
+                   {% for star in product.rating|times %}
+                        <li> 
+
+                          <i class="fas fa-star blue-text"></i>
+
+                        </li>
+                    {% endfor %}
+                    {% for star in product.rating|times1 %}
+                      <li>
+
+                        <i class="fas fa-star grey-text"></i>
+
+                      </li>
+                    {% endfor %}
+
+                  </ul>
+
+                  <!-- Card footer -->
+                  <div class="card-footer pb-0">
+
+                    <div class="row mb-0">
+                         
+                              <span class="float-left">
+
+                                <span class="h6-responsive font-weight-bold dark-grey-text">
+
+                                <strong>{{product.price|mul:product.discount}}&#x20b9;</strong>
+
+                                <span class="grey-text">
+
+                                  <small>
+                                    {% if  0|eql:product.discount %}
+                                    <s>{{product.price}}</s>&#x20b9;
+                                    {% endif %}
+                                  </small>
+
+                                </span>
+                                    {% if  0|eql:product.discount %}
+                                    <span>
+                                        {{product.discount}}&#37;
+                                    
+                                  </span>
+                                    {% endif %}
+                                    {% if request.session.name %}
+                              <span class="float-right">
+
+                                <a href="/addtocart/{{product.id}}" >
+
+                                  <i class="fas fa-shopping-cart ml-3"></a></i>
+
+                              </span>
+                              {% endif %}
+                    </div>
+
+                  </div>
+
+                </div>
+                <!-- Card content -->
+
+              </div>
+              
+              <!-- Card -->
+
+            </div>
+          {% endfor %}
+ 
+          </div>
+          {% endif %}
+          <!-- First slide -->
+
+          <!-- Second slide -->
+          {% if rproducts2 %}
+          <div class="carousel-item">
+          
+            {% for product in rproducts2 %}
+            <div class="col-md-4 mb-4">
+
+              <!-- Card -->
+              <div class="card card-ecommerce">
+
+                <!-- Card image -->
+                <div class="view overlay" style=" overflow: hidden; height:300px;">
+
+                  <img src="{{product.imageURL}}" class="img-fluid"
+                    alt="product">
+
+                  <a href="/product/{{product.id}}">
+
+                    <div class="mask rgba-white-slight"></div>
+
+                  </a>
+
+                </div>
+                <!-- Card image -->
+
+                <!-- Card content -->
+                <div class="card-body">
+
+                  <!-- Category & Title -->
+                  <h5 class="card-title mb-1">
+
+                    <strong>
+
+                      <a href="" class="dark-grey-text">{{product.name}}</a>
+
+                    </strong>
+
+                  </h5>
+                    {% for Category in product.category %}
+                        {% if Category == 'bestseller' %}
+                            <span class="badge badge-danger mb-2">{{Category}}</span>
+                        {% endif %}
+                        {% if Category == 'sale' %}
+                            <span class="badge badge-success mb-2">{{Category}}</span>
+                        {% endif %}
+                        {% if Category == 'new' %}
+                            <span class="badge badge-info mb-2">{{Category}}</span>
+                        {% endif %}
+                    {% endfor %}
+
+                  <!-- Rating -->
+                  <ul class="rating">
+
+                   {% for star in product.rating|times %}
+                        <li> 
+
+                          <i class="fas fa-star blue-text"></i>
+
+                        </li>
+                    {% endfor %}
+                    {% for star in product.rating|times1 %}
+                      <li>
+
+                        <i class="fas fa-star grey-text"></i>
+
+                      </li>
+                    {% endfor %}
+
+                  </ul>
+
+                  <!-- Card footer -->
+                   <div class="card-footer pb-0">
+
+                    <div class="row mb-0">
+                         
+                              <span class="float-left">
+
+                                <span class="h6-responsive font-weight-bold dark-grey-text">
+
+                                <strong>{{product.price|mul:product.discount}}&#x20b9;</strong>
+
+                                <span class="grey-text">
+
+                                  <small>
+                                    {% if  0|eql:product.discount %}
+                                    <s>{{product.price}}</s>&#x20b9;
+                                    {% endif %}
+                                  </small>
+
+                                </span>
+                                    {% if  0|eql:product.discount %}
+                                    <span>
+                                        {{product.discount}}&#37;
+                                    
+                                  </span>
+                                    {% endif %}
+                                    {% if request.session.name %}
+                              <span class="float-right">
+
+                                <a href="/addtocart/{{product.id}}" >
+
+                                  <i class="fas fa-shopping-cart ml-3"></a></i>
+
+                              </span>
+                              {% endif %}
+                    </div>
+
+                  </div>
+
+                </div>
+                <!-- Card content -->
+
+              </div>
+              <!-- Card -->
+
+            </div>
+          {% endfor %}
+ 
+          </div>
+          {% endif %}
+          <!-- Second slide -->
+
+          <!-- Third slide -->
+          {% if rproducts3 %}
+          <div class="carousel-item">
+          
+          {% for product in rproducts3 %}
+            <div class="col-md-4 mb-4">
+
+              <!-- Card -->
+              <div class="card card-ecommerce">
+
+                <!-- Card image -->
+                <div class="view overlay" style=" overflow: hidden; height:300px;">
+
+                  <img src="{{product.imageURL}}" class="img-fluid"
+                    alt="product">
+
+                  <a href="/product/{{product.id}}">
+
+                    <div class="mask rgba-white-slight"></div>
+
+                  </a>
+
+                </div>
+                <!-- Card image -->
+
+                <!-- Card content -->
+                <div class="card-body">
+
+                  <!-- Category & Title -->
+                  <h5 class="card-title mb-1">
+
+                    <strong>
+
+                      <a href="" class="dark-grey-text">{{product.name}}</a>
+
+                    </strong>
+
+                  </h5>
+                    {% for Category in product.category %}
+                        {% if Category == 'bestseller' %}
+                            <span class="badge badge-danger mb-2">{{Category}}</span>
+                        {% endif %}
+                        {% if Category == 'sale' %}
+                            <span class="badge badge-success mb-2">{{Category}}</span>
+                        {% endif %}
+                        {% if Category == 'new' %}
+                            <span class="badge badge-info mb-2">{{Category}}</span>
+                        {% endif %}
+                    {% endfor %}
+
+                  <!-- Rating -->
+                  <ul class="rating">
+
+                   {% for star in product.rating|times %}
+                        <li> 
+
+                          <i class="fas fa-star blue-text"></i>
+
+                        </li>
+                    {% endfor %}
+                    {% for star in product.rating|times1 %}
+                      <li>
+
+                        <i class="fas fa-star grey-text"></i>
+
+                      </li>
+                    {% endfor %}
+
+                  </ul>
+
+                  <!-- Card footer -->
+                   <div class="card-footer pb-0">
+
+                    <div class="row mb-0">
+                         
+                              <span class="float-left">
+
+                                <span class="h6-responsive font-weight-bold dark-grey-text">
+
+                                <strong>{{product.price|mul:product.discount}}&#x20b9;</strong>
+
+                                <span class="grey-text">
+
+                                  <small>
+                                    {% if  0|eql:product.discount %}
+                                    <s>{{product.price}}</s>&#x20b9;
+                                    {% endif %}
+                                  </small>
+
+                                </span>
+                                    {% if  0|eql:product.discount %}
+                                    <span>
+                                        {{product.discount}}&#37;
+                                    
+                                  </span>
+                                    {% endif %}
+                                    {% if request.session.name %}
+                              <span class="float-right">
+
+                                <a href="/addtocart/{{product.id}}" >
+
+                                  <i class="fas fa-shopping-cart ml-3"></a></i>
+
+                              </span>
+                              {% endif %}
+                    </div>
+
+                  </div>
+
+                </div>
+                <!-- Card content -->
+
+              </div>
+              <!-- Card -->
+
+            </div>
+          {% endfor %}
+          
+ 
+          </div>
+          {% endif %}
+          <!-- Third slide -->
+
+        </div>
+        <!-- Slides -->
+
+      </div>
+      <!-- Carousel Wrapper -->
+
+    </section>
+    <!-- Section: Products v.5 -->
+
+  </div>
+{% endblock content %}

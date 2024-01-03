@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+  {% load index %}
+  <link rel="stylesheet" type="text/css" href="../static/css/style.css">
+  {% block content %}
+  <main>
+    <div class="container-fluid">
+      <section class="mb-4">
+        <div class="card">
+          <div class="card-body d-flex justify-content-between">
+            <h4 class="h4-responsive mt-3">Invoice #{{invoiceno}}</h4>
+            <div>
+              <a href="/payment" class="btn btn-secondary">Pay Now</a>
+              <a href="/codpayment" class="btn btn-primary"> COD</a>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="mb-4">
+        <div class="card">
+          <div class="card-body">
+            <div class="row">
+              <div class="col-md-6 text-left">
+                <p><small>From:</small></p>
+                <p><strong>PYS Company Inc</strong></p>
+                <p>134 Royal Arcade, Sarthana Jakatnaka</p>
+                <p>Surat, Gujarat 395006</p>
+                <p><strong>Invoice date:</strong> {{date}}</p>
+              </div>
+              <div class="col-md-6 text-right">
+                <h4 class="h4-responsive"><small>Invoice No.</small><br /><strong><span class="blue-text">#{{invoiceno}}</span></strong></h4>
+                <p><small>To:</small></p>
+                <p>{{custaddress}}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="mb-5">
+        <div class="card">
+          <div class="card-body">
+            <div class="table-responsive">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>Item list</th>
+                    <th>Quantity</th>
+                    <th>Unit Price</th>
+                    <th>Tax</th>
+                    <th>Total price</th>
+                  </tr>
+                </thead>
+                <tbody>
+                {% for product in products%}
+                  <tr>
+                    <td>{{product|index:0}}</td>
+                    <td>{{product|index:2}}</td>
+                    <td>{{product|index:1}}&#x20b9;</td>
+                    <td>{{product|index:4}}&#x20b9;</td>
+                    <td>{{product|index:3}}&#x20b9;</td>
+                  </tr>
+              {% endfor %}
+                </tbody>
+              </table>
+            </div>
+            <ul class="list-unstyled text-right">
+              <li><strong>Sub Total:</strong><span class="float-right ml-3">{{subtotal}}&#x20b9;</span></li>
+              {% comment %} <li><strong>Delivery Charges:</strong><span class="float-right ml-3">50&#x20b9;</span></li> {% endcomment %}
+              <li><strong>TAX:</strong><span class="float-right ml-3">{{totaltax}}&#x20b9;</span></li>
+              <li class="mb-3"><span class="ml-3 grey-text"><small>18% GST</small></span></li>
+              
+              <li><strong>TOTAL:</strong><span class="float-right ml-3">{{total}}&#x20b9;</span></li>
+            </ul>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+{% endblock %}
