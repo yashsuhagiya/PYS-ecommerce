@@ -2,6 +2,8 @@
 django-mysql
 django-environ
 dj-database-url
+urllib3
+openssl
 PyMySQL
 pillow
 pycryptodome
