@@ -3,7 +3,6 @@ django-mysql
 environ
 dj-database-url
 PyMySQL
-mysql
 pillow
 pycryptodome
 social-auth-app-django
