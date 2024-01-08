@@ -6,3 +6,4 @@ pycryptodome
 social-auth-app-django
 social-auth-core
 psycopg2-binary~=2.9.3
+urllib3==1.26.6
