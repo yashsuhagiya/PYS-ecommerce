@@ -1,11 +1,8 @@
 ﻿Django
-django-mysql
 django-environ
 dj-database-url
-PyMySQL
 pillow
 pycryptodome
 social-auth-app-django
 social-auth-core
-sqlparse
-mysqlclient
+psycopg2
