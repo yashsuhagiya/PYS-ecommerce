@@ -1,4 +1,4 @@
-from django_mysql.models import ListCharField
+from django.contrib.postgres.fields import ArrayField
 from django.db import models,migrations
 
 class Address(models.Model):
@@ -19,7 +19,7 @@ class Customer(models.Model):
 	password = models.CharField(max_length=200,null=True)
 	mobile_no = models.BigIntegerField(null=True,blank=True)
 	gender = models.CharField(max_length=20,default="Male")
-	search = ListCharField(
+	search = ArrayField(
 		base_field = models.CharField(max_length=10),
 		size = 5,
 		max_length = (5*11)
@@ -42,14 +42,14 @@ class Product(models.Model):
 	name = models.CharField(max_length=200)
 	price = models.DecimalField(max_digits=7,decimal_places=2,default=0)
 	image = models.ImageField(null=True, blank=True)
-	category = ListCharField(
+	category = ArrayField(
 		base_field = models.CharField(max_length=10),
 		size = 5,
 		max_length = (5*11),
 	)
 	stock = models.IntegerField(default=0)
 	color = models.CharField(max_length=20,null=True)
-	size = ListCharField(
+	size = ArrayField(
 		base_field = models.CharField(max_length=3),
 		size = 6,
 		max_length = (6*4),
