@@ -2,7 +2,6 @@
 
 # Build the project
 echo "Building the project..."
-apt-get install python3-dev default-libmysqlclient-dev build-essential
 python3.11 -m pip install -r requirements.txt
 
 echo "Make Migration..."
