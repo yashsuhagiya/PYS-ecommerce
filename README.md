@@ -2,6 +2,8 @@
 
 This is a web application developed using Django.
 
+![Screenshot](/shop/static/images/sc1.PNG)
+
 ## Getting Started
 
 These instructions will get you a copy of the project up and running on your local machine for development.
