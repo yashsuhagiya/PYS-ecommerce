@@ -3,4 +3,6 @@ __pycache__
 *.pyc
 .env
 
+migrations
+
 staticfiles_build/
