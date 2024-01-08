@@ -1,5 +1,5 @@
 from django.contrib.postgres.fields import ArrayField
-from django.db import models,migrations
+from django.db import models
 
 class Address(models.Model):
 	first_len = models.CharField(max_length=200,null=False)
@@ -13,16 +13,17 @@ class Address(models.Model):
          return self.first_len+" "+self.second_len
 
 class Customer(models.Model):
-	firstname = models.CharField(max_length=200,null=True)
-	lastname = models.CharField(max_length=200,null=True)
-	email = models.CharField(max_length=200,null=True)
-	password = models.CharField(max_length=200,null=True)
-	mobile_no = models.BigIntegerField(null=True,blank=True)
+	firstname = models.CharField(max_length=200,null=False)
+	lastname = models.CharField(max_length=200,null=False)
+	email = models.CharField(max_length=200,null=False)
+	password = models.CharField(max_length=200,null=False)
+	mobile_no = models.BigIntegerField(null=False,blank=False)
 	gender = models.CharField(max_length=20,default="Male")
 	search = ArrayField(
 		base_field = models.CharField(max_length=10),
 		size = 5,
-		max_length = (5*11)
+		max_length = (5*11),
+		null=True
 	)
 	address = models.ForeignKey(Address, on_delete=models.CASCADE, null=True)
 
