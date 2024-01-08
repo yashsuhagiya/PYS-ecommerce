@@ -20,11 +20,13 @@ class Customer(models.Model):
 	mobile_no = models.BigIntegerField(null=False,blank=False)
 	gender = models.CharField(max_length=20,default="Male")
 	search = ArrayField(
-		base_field = models.CharField(max_length=10),
-		size = 5,
-		max_length = (5*11),
-		null=True
+    	base_field=models.CharField(max_length=10),
+    	size=5,
+    	max_length=(5*11),
+    	null=True,
+    	default=list  # or default=list() depending on Django version
 	)
+
 	address = models.ForeignKey(Address, on_delete=models.CASCADE, null=True)
 
 	def __str__(self):
