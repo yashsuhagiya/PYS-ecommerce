@@ -105,7 +105,7 @@ def registrationdata(request):
         text_content = strip_tags(html_content)
         from_email = settings.EMAIL_HOST_USER
         to_list = [email]
-        mail = EmailMultiAlternatives("PYS | Thank you!", text_content, from_email, to_list)
+        mail = EmailMultiAlternatives("Welcome to PYS", text_content, "PYS Services <do-not-reply@pysservices.com>", to_list)
         mail.attach_alternative(html_content,"text/html")
         mail.send()
         return HttpResponseRedirect('/login/')
