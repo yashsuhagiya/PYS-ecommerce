@@ -20,7 +20,7 @@ from . import Checksum
 import hashlib 
 import datetime
 from django.contrib.auth.decorators import login_required
-MERCHANT_KEY = 'j4zE3okbkZGg71&Z'
+MERCHANT_KEY = settings.MERCHANT_KEY
 
 
 def product(request,id):
@@ -553,14 +553,14 @@ def payment(request):
     orderid=request.session.get("invoiceno")
     amount=request.session.get("total")
     param_dict={
-        'MID': 'UkrRLw57778088991509',
+        'MID': settings.MERCHANT_ID,
         'ORDER_ID': str(orderid),
         'TXN_AMOUNT': str(amount),
         'CUST_ID': str(q.id),
         'INDUSTRY_TYPE_ID': 'Retail',
         'WEBSITE': 'WEBSTAGING',
         'CHANNEL_ID': 'WEB',
-        'CALLBACK_URL':'http://127.0.0.1:8000/paytm/',
+        'CALLBACK_URL': settings.ENVIRONMENT + '/paytm/',
     }
     
     param_dict['CHECKSUMHASH'] = Checksum.generate_checksum(param_dict, MERCHANT_KEY)
