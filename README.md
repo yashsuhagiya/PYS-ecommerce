@@ -23,13 +23,13 @@ A step by step series of examples that tell you how to get a development environ
 1. Clone the repository
 
 ```bash
-git clone https://github.com/yashsuhagiya/PYS-ecommerce.git
+git clone https://github.com/yashsuhagiya/pys-ecommerce.git
 ```
 
 2. Navigate to the project directory
 
 ```bash
-cd PYS-ecommerce
+cd pys-ecommerce
 ```
 
 3. Install the requirements
