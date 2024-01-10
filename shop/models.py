@@ -63,6 +63,15 @@ class Product(models.Model):
 
 	def __str__(self):
 		return self.name
+	
+	def save(self, *args, **kwargs):
+        # Convert the comma-separated string to a list
+		if isinstance(self.category, str):
+			self.category = self.category.split(',')
+		if isinstance(self.size, str):
+			self.size = self.size.split(',')
+
+		super().save(*args, **kwargs)
 
 	@property
 	def imageURL(self):
